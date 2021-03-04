@@ -3,6 +3,7 @@ defmodule EventsApp.Repo.Migrations.CreateEvents do
 
   def change do
     create table(:events) do
+      add :user_id, references(:users), null: false
       add :body, :text, null: false
 
       timestamps()
