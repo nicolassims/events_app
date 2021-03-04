@@ -8,12 +8,10 @@
 <div class="row">
   <%= for event <- @events do %>
     <div class="col-sm-4 card">
-      <!--
-      <img class="card-img-top" src="" alt="">
-      -->
       <div class="card-body">
-       <p>Posted by <%= event.user.name %></p>
-        <p class="card-text"><%= event.body %></p>
+        <p>Posted by <%= event.user.name %></p>
+        <p class="card-title h5"><%= event.name %></p>
+        <p class="card-text"><%= event.date %>: <%= event.body %></p>
         <%= link "view", to: Routes.event_path(@conn, :show, event) %>
       </div>
     </div>

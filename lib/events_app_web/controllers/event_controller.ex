@@ -18,7 +18,8 @@ defmodule EventsAppWeb.EventController do
     IO.inspect(event_params)
     event_params = event_params
     |> Map.put("user_id", conn.assigns[:current_user].id)
-    |> Map.put("date", Map.fetch!(event_params, "date"))
+    #|> Map.put("name", Map.fetch!(event_params, "name"))
+    #|> Map.put("date", Map.fetch!(event_params, "date"))
     case Events.create_event(event_params) do
       {:ok, event} ->
         conn
