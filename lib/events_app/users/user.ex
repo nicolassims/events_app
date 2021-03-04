@@ -17,5 +17,7 @@ defmodule EventsApp.Users.User do
     user
     |> cast(attrs, [:name, :email, :password])
     |> validate_required([:name, :email, :password])
+    |> unique_constraint(:email)
+    |> validate_format(:email, ~r/^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,}$/)
   end
 end
