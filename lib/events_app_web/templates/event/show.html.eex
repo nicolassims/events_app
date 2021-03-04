@@ -6,5 +6,5 @@
 <h1>Show Event #<%= @event.id %></h1>
 
 <div>
-  <%= @event.body %>
+  On <%= @event.date %>: <%= @event.body %>
 </div>
