@@ -7,6 +7,7 @@ defmodule EventsApp.Repo.Migrations.CreateEvents do
       add :name, :text, null: false
       add :date, :naive_datetime, null: false
       add :body, :text, null: false
+      add :guests, :text, null: false
 
       timestamps()
     end

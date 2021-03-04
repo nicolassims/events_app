@@ -23,6 +23,12 @@
     <%= error_tag f, :body %>
   </div>
 
+  <div class="form-group">
+    <%= label f, :guests %>
+    <%= textarea f, :guests, class: "form-control", placeholder: "Type email addresses here, separated by a comma."%>
+    <%= error_tag f, :guests %>
+  </div>
+
   <div>
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
