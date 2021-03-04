@@ -5,7 +5,13 @@
     </div>
   <% end %>
 
-   <div class="form-group">
+  <div class="form-group">
+    <%= label f, :date %>
+    <%= text_input f, :date, class: "form-control flatpickr-datetime" %>
+    <%= error_tag f, :date %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :body %>
     <%= textarea f, :body, class: "form-control" %>
     <%= error_tag f, :body %>
@@ -14,4 +20,6 @@
   <div>
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <% end %>

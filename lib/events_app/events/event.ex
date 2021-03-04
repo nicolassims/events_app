@@ -3,6 +3,7 @@ defmodule EventsApp.Events.Event do
   import Ecto.Changeset
 
   schema "events" do
+    field :date, :naive_datetime
     field :body, :string
 
     timestamps()
@@ -13,7 +14,7 @@ defmodule EventsApp.Events.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:body])
-    |> validate_required([:body])
+    |> cast(attrs, [:body, :date, :user_id])
+    |> validate_required([:body, :date, :user_id])
   end
 end

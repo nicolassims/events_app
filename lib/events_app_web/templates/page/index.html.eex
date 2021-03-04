@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col">
-    <h1>Photo Feed</h1>
+    <h1>Listing Events</h1>
+    <% link "New Event", to: Routes.event_path(@conn, :new) %>
   </div>
 </div>
 
@@ -11,6 +12,7 @@
       <img class="card-img-top" src="" alt="">
       -->
       <div class="card-body">
+       <p>Posted by <%= event.user.name %></p>
         <p class="card-text"><%= event.body %></p>
         <%= link "view", to: Routes.event_path(@conn, :show, event) %>
       </div>
