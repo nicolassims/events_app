@@ -6,6 +6,8 @@ defmodule EventsApp.Events.Event do
     field :body, :string
 
     timestamps()
+
+    belongs_to :user, EventsApp.Users.User
   end
 
   @doc false

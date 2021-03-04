@@ -8,6 +8,8 @@ defmodule EventsApp.Users.User do
     field :password, :string
 
     timestamps()
+
+    has_many :posts, EventsApp.Events.Event
   end
 
   @doc false
