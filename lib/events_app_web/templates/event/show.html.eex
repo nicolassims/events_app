@@ -1,6 +1,6 @@
 <p>
-  <span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
-  <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+  <span><%= link "Edit", class: "btn btn-primary", to: Routes.event_path(@conn, :edit, @event) %></span>
+  <span><%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :index) %></span>
 </p>
 
 <h1><%= @event.name %></h1>

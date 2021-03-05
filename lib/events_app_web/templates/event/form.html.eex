@@ -5,33 +5,41 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :name %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
-  </div>
+  <%= if @current_user == nil do %>
+    <div class="alert alert-danger">
+      <p>You are not logged in. You are not be able to make a new event.</p>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <%= label f, :name %>
+      <%= text_input f, :name, class: "form-control" %>
+      <%= error_tag f, :name %>
+    </div>
 
-  <div class="form-group">
-    <%= label f, :date %>
-    <%= text_input f, :date, class: "form-control flatpickr-datetime" %>
-    <%= error_tag f, :date %>
-  </div>
+    <div class="form-group">
+      <%= label f, :date %>
+      <%= text_input f, :date, class: "form-control flatpickr-datetime" %>
+      <%= error_tag f, :date %>
+    </div>
 
-  <div class="form-group">
-    <%= label f, :body %>
-    <%= textarea f, :body, class: "form-control" %>
-    <%= error_tag f, :body %>
-  </div>
+    <div class="form-group">
+      <%= label f, :body %>
+      <%= textarea f, :body, class: "form-control" %>
+      <%= error_tag f, :body %>
+    </div>
 
-  <div class="form-group">
-    <%= label f, :guests %>
-    <%= textarea f, :guests, class: "form-control", placeholder: "Type email addresses here, separated by a comma."%>
-    <%= error_tag f, :guests %>
-  </div>
+    <div class="form-group">
+      <%= label f, :guests %>
+      <%= textarea f, :guests, class: "form-control", placeholder: "Type email addresses here, separated by a comma."%>
+      <%= error_tag f, :guests %>
+    </div>
 
-  <div>
-    <%= submit "Save", class: "btn btn-primary" %>
-  </div>
+    <div>
+      <%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :index) %>
+      <%= submit "Save", class: "btn btn-primary" %>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+
+  <% end %>
 <% end %>

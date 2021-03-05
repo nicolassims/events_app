@@ -15,17 +15,21 @@ defmodule EventsAppWeb.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
-    IO.inspect(event_params)
-    event_params = event_params
-    |> Map.put("user_id", conn.assigns[:current_user].id)
-    case Events.create_event(event_params) do
-      {:ok, event} ->
-        conn
-        |> put_flash(:info, "Event created successfully.")
-        |> redirect(to: Routes.event_path(conn, :show, event))
+    user = conn.assigns[:current_user]
+    if user == nil do
+      render(conn, "new.html", changeset: Event.changeset(%Event{}, %{}))
+    else
+      event_params = event_params
+      |> Map.put("user_id", conn.assigns[:current_user].id)
+      case Events.create_event(event_params) do
+        {:ok, event} ->
+          conn
+          |> put_flash(:info, "Event created successfully.")
+          |> redirect(to: Routes.event_path(conn, :show, event))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "new.html", changeset: changeset)
+      end
     end
   end
 
