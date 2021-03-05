@@ -17,12 +17,12 @@ mix phx.digest
 
 mix ecto.migrate
 
-npm install --prefix ./assets
-npm run deploy --prefix ./assets
-mix phx.digest
+mix local.hex --force
+mix local.rebar --force
+mix release --force --overwrite
 
 echo "Generating release..."
-mix release
+
 
 #echo "Stopping old copy of app, if any..."
 #_build/prod/rel/practice/bin/practice stop || true
