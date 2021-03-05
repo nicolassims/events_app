@@ -23,6 +23,5 @@
   </tbody>
 </table>
 
-<% if User != nil do %>
-  <span><%= link "New Event", to: Routes.event_path(@conn, :new) %></span>
-<% end %>
+<span><%= link "Back", class: "btn btn-primary", to: "/" %></span>
+<span><%= link "New Event", class: "btn btn-primary", to: Routes.event_path(@conn, :new) %></span>

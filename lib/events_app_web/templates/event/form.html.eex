@@ -9,6 +9,7 @@
     <div class="alert alert-danger">
       <p>You are not logged in. You are not be able to make a new event.</p>
     </div>
+    <%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :index) %>
   <% else %>
     <div class="form-group">
       <%= label f, :name %>
