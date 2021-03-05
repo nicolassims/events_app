@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Password</th>
+      <!--<th>Password</th>-->
 
       <th></th>
     </tr>
@@ -15,7 +15,7 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td><%= user.password %></td>
+      <!--<td><%= user.password %></td>-->
 
       <td>
         <span><%= link "Show", to: Routes.user_path(@conn, :show, user) %></span>
