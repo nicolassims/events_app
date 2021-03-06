@@ -3,7 +3,7 @@
 export MIX_ENV=prod
 export port=4900
 
-CFGD=$(readlink -f ~./config/hangman)
+CFGD=$(readlink -f ~/.config/events_app)
 
 if [ ! -e "$CFGD/base" ]; then
 	echo "run deploy first"
