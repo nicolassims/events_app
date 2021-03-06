@@ -13,7 +13,7 @@ config :events_app,
 # Configures the endpoint
 config :events_app, EventsAppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "UBc0xMqJna1BMfUCkhC/083+r7pjmysoNhop7aVLcYS7paQ4r8FTLzMHExcx6c0C",
+  secret_key_base: "W68eso5YQOlbtvSNUR50N/HDWj6IaEhAwMR3LtzuBEQAefwYVbX84bvoTA7XtiGi",
   render_errors: [view: EventsAppWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: EventsApp.PubSub,
   live_view: [signing_salt: "JO1TxiVi"]

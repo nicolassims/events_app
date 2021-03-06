@@ -1,32 +1,37 @@
 #!/bin/bash
 
-export SECRET_KEY_BASE=W68eso5YQOlbtvSNUR50N/HDWj6IaEhAwMR3LtzuBEQAefwYVbX84bvoTA7XtiGi
 export MIX_ENV=prod
 export PORT=4900
-export NODEBIN=`pwd`/assets/node_modules/.bin
-export PATH="$PATH:$NODEBIN"
-export DATABASE_URL=ecto://events:karayakaylar@localhost/events_app_prod
-
-echo "Building..."
+export SECRET_KEY_BASE=insecure
+export DATABASE_URL=ecto://events:bad@localhost/events_app_prod
 
 mix deps.get --only prod
 mix compile
-(cd assets && npm install)
-(cd assets && webpack --mode production)
-mix phx.digest
+
+CFGD=$(readlink -f ~/.config/events_app)
+
+if [ ! -d "$CFGD" ]; then
+	mkdir -p "$CFGD"
+fi
+
+if [ ! -e "$CFGD/base" ]; then
+	mix phx.gen.secret > "$CFGD/base"
+fi
+
+if [ ! -e "$CFGD/db_pass" ]; then
+	pwgen 12 1 > "$CFGD/db_pass"
+fi
+
+SECRET_KEY_BASE=$(cat "$CFGD/base")
+export SECRET_KEY_BASE
+
+DP_PASS=$(cat "$CFGD/db_pass")
+export DATABASE_URL=ecto://events:$DB_PASS@localhost/events_app_prod
 
 mix ecto.migrate
 
-mix local.hex --force
-mix local.rebar --force
-mix release --force --overwrite
+npm install --prefix ./assets
+npm run deploy --prefix ./assets
+mix phx.digest
 
-echo "Generating release..."
-
-
-#echo "Stopping old copy of app, if any..."
-#_build/prod/rel/practice/bin/practice stop || true
-
-echo "Starting app..."
-
-PROD=t ./start.sh
+mix release
