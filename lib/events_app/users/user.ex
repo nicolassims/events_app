@@ -9,7 +9,7 @@ defmodule EventsApp.Users.User do
 
     timestamps()
 
-    has_many :posts, EventsApp.Events.Event
+    has_many :events, EventsApp.Events.Event
   end
 
   @doc false
