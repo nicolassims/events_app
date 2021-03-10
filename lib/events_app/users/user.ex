@@ -6,6 +6,7 @@ defmodule EventsApp.Users.User do
     field :email, :string
     field :name, :string
     field :password, :string
+    field :photo_hash, :string
 
     timestamps()
 
@@ -15,8 +16,8 @@ defmodule EventsApp.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password])
-    |> validate_required([:name, :email, :password])
+    |> cast(attrs, [:name, :photo_hash, :email, :password])
+    |> validate_required([:name, :photo_hash, :email, :password])
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,}$/)
   end
