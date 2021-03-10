@@ -15,7 +15,7 @@
 
       <td>
         <span><%= link "Show", to: Routes.event_path(@conn, :show, event) %></span>
-        <%= if @conn.assigns[:current_user] == event.user do %>
+        <%= if same_user(@conn, event.user_id) do %>
           | <span><%= link "Edit", to: Routes.event_path(@conn, :edit, event) %> |</span>
           <span><%= link "Delete", to: Routes.event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <% end %>
