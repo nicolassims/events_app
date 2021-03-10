@@ -3,6 +3,9 @@
   <span><%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :index) %></span>
 </p>
 
+<!--<%= if @conn.assigns[:current_user] == @event.user do %>-->
+<!--<% end %>-->
+
 <h1><%= @event.name %></h1>
 
 <div>
