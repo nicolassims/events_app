@@ -23,5 +23,8 @@
 
 </ul>
 
-<span><%= link "Edit", class: "btn btn-primary", to: Routes.user_path(@conn, :edit, @user) %></span>
+<%= if same_user(@conn, @user.id) do %>
+  <span><%= link "Edit", class: "btn btn-primary", to: Routes.user_path(@conn, :edit, @user) %></span>
+<% end %>
+
 <span><%= link "Back", class: "btn btn-primary", to: Routes.user_path(@conn, :index) %></span>

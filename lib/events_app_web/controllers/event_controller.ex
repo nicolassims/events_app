@@ -4,6 +4,9 @@ defmodule EventsAppWeb.EventController do
   alias EventsApp.Events
   alias EventsApp.Events.Event
 
+  alias EventsAppWeb.Plugs
+  plug Plugs.RequireUser when action in [:new, :edit, :create, :update]
+
   def index(conn, _params) do
     events = Events.list_events()
     render(conn, "index.html", events: events)
