@@ -13,7 +13,18 @@
 <%= for comment <- @comments do %>
     <tr>
       <td><%= comment.body %></td>
-      <td><%= comment.response %></td>
+      <%= if comment.response == 0 do %>
+        <td>Response: Coming.</td>
+      <% end %>
+      <%= if comment.response == 1 do %>
+        <td>Response: Not Coming.</td>
+      <% end %>
+      <%= if comment.response == 2 do %>
+        <td>Response: Undecided.</td>
+      <% end %>
+      <%= if comment.response == 3 do %>
+        <td>This is an error.</td>
+      <% end %>
 
       <td>
         <span><%= link "Show", to: Routes.comment_path(@conn, :show, comment) %></span>

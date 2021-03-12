@@ -16,7 +16,7 @@
 
   <div class="form-group">
     <%= label f, :response %>
-    <%= number_input f, :response, class: "form-control" %>
+    <%= select f, :response, ["Coming": 0, "Not Coming": 1, "Undecided": 2], class: "form-control", selected: 3 %>
     <%= error_tag f, :response %>
   </div>
 

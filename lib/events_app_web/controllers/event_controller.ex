@@ -37,7 +37,7 @@ defmodule EventsAppWeb.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    event = conn.assigns[:event]
+    event = Events.get_event!(id)
     |> Events.load_comments()
     comm = %EventsApp.Comments.Comment{
       event_id: event.id,

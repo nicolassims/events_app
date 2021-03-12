@@ -5,32 +5,38 @@
   <span><%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :index) %></span>
 </p>
 
-<h1><%= @event.name %></h1>
-<h2>by <%= @event.user.name %></h2>
-<img src="<%= Routes.user_path(@conn, :photo, @event.user) %>" alt="A profile picture." alt="">
-
 <div>
-  On <%= @event.date %>: <%= @event.body %>
+  <h1><%= @event.name %></h1>
+  <h2>by <%= @event.user.name %></h2>
+  <img src="<%= Routes.user_path(@conn, :photo, @event.user) %>" alt="A profile picture." alt="">
+
+  <div>
+    On <%= @event.date %>: <%= @event.body %>
+  </div>
 </div>
 
-<h2>Add Comment</h2>
+<div>
+  <h2>Add Comment</h2>
 
-<%= if any_user(@conn) do %>
-  <%= render(
-    EventsAppWeb.CommentView,
-    "form.html",
-    changeset: @new_comment,
-    action: Routes.comment_path(@conn, :create)
-  ) %>
-<% end %>
+  <%= if any_user(@conn) do %>
+    <%= render(
+      EventsAppWeb.CommentView,
+      "form.html",
+      changeset: @new_comment,
+      action: Routes.comment_path(@conn, :create)
+    ) %>
+  <% end %>
+</div>
 
-<h2>Comments</h2>
+<div>
+  <h2>Comments</h2>
 
-<%= for comm <- @event.comments do %>
-  <div class="card">
-    <div class="card-body">
-      <p>Posted by <%= comm.user.name %></p>
-      <p class="card-text"><%= comm.body %></p>
+  <%= for comm <- @event.comments do %>
+    <div class="card">
+      <div class="card-body">
+        <p>Posted by <%= comm.user.name %></p>
+        <p class="card-text"><%= comm.body %></p>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

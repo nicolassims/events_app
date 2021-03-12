@@ -19,6 +19,8 @@ defmodule EventsApp.Comments do
   """
   def list_comments do
     Repo.all(Comment)
+    |> Repo.preload(:user)
+    |> Repo.preload(:event)
   end
 
   @doc """
@@ -35,7 +37,11 @@ defmodule EventsApp.Comments do
       ** (Ecto.NoResultsError)
 
   """
-  def get_comment!(id), do: Repo.get!(Comment, id)
+  def get_comment!(id) do
+    Repo.get!(Comment, id)
+    |> Repo.preload(:user)
+    |> Repo.preload(:event)
+  end
 
   @doc """
   Creates a comment.

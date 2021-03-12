@@ -7,12 +7,23 @@
     <%= @comment.body %>
   </li>
 
-  <li>
-    <strong>Response:</strong>
-    <%= @comment.response %>
-  </li>
-
+  <%= if @comment.response == 0 do %>
+    <li><strong>Response:</strong> Coming.</li>
+  <% end %>
+  <%= if @comment.response == 1 do %>
+    <li><strong>Response:</strong> Not Coming.</li>
+  <% end %>
+  <%= if @comment.response == 2 do %>
+    <li><strong>Response:</strong> Undecided.</li>
+  <% end %>
+  <%= if @comment.response == 3 do %>
+    <li>This is an error.</li>
+  <% end %>
 </ul>
 
-<span><%= link "Edit", to: Routes.comment_path(@conn, :edit, @comment) %></span>
+<% IO.inspect(@comment.event) %>
+
+<%= if same_user(@conn, @comment.user_id) || same_user(@conn, @comment.event.user_id) do %>
+  <span><%= link "Edit", to: Routes.comment_path(@conn, :edit, @comment) %></span>
+<% end %>
 <span><%= link "Back", to: Routes.comment_path(@conn, :index) %></span>
