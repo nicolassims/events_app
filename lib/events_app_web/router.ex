@@ -19,6 +19,7 @@ defmodule EventsAppWeb.Router do
 
     get "/", PageController, :index
     resources "/events", EventController
+    resources "/comments", CommentController
     resources "/users", UserController
     get "/users/photo/:id/", UserController, :photo
     resources "/session", SessionController,

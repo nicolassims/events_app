@@ -5,7 +5,7 @@ defmodule EventsAppWeb.UserController do
   alias EventsApp.Users.User
   alias EventsApp.Photos
   alias EventsAppWeb.Plugs
-  plug Plugs.RequireUser when action in [:new, :edit, :create, :update]
+  plug Plugs.RequireUser when action in [:edit, :update]
 
   def index(conn, _params) do
     users = Users.list_users()

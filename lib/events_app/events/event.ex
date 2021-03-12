@@ -11,6 +11,7 @@ defmodule EventsApp.Events.Event do
     timestamps()
 
     belongs_to :user, EventsApp.Users.User
+    has_many :comments, EventsApp.Comments.Comment
   end
 
   @doc false
