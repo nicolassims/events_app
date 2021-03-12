@@ -15,18 +15,20 @@
   </div>
 </div>
 
-<div>
-  <h2>Add Comment</h2>
+<%= if String.contains?(@event.guests, @current_user.email) || same_user(@conn, @event.user_id) do %>
+  <div>
+    <h2>Add Comment</h2>
 
-  <%= if any_user(@conn) do %>
-    <%= render(
-      EventsAppWeb.CommentView,
-      "form.html",
-      changeset: @new_comment,
-      action: Routes.comment_path(@conn, :create)
-    ) %>
-  <% end %>
-</div>
+    <%= if any_user(@conn) do %>
+      <%= render(
+        EventsAppWeb.CommentView,
+        "form.html",
+        changeset: @new_comment,
+        action: Routes.comment_path(@conn, :create)
+      ) %>
+    <% end %>
+  </div>
+<% end %>
 
 <div>
   <h2>Comments</h2>
