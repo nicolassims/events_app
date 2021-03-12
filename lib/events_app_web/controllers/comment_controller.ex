@@ -3,6 +3,8 @@ defmodule EventsAppWeb.CommentController do
 
   alias EventsApp.Comments
   alias EventsApp.Comments.Comment
+  alias EventsAppWeb.Plugs
+  plug Plugs.RequireUser when action in [:new, :edit, :create, :update]
 
   def index(conn, _params) do
     comments = Comments.list_comments()
