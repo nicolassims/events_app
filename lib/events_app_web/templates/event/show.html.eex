@@ -36,7 +36,20 @@
   <%= for comm <- @event.comments do %>
     <div class="card">
       <div class="card-body">
-        <p>Posted by <%= comm.user.name %></p>
+        <p>Posted by <%= comm.user.name %>, who is
+         <%= if EventsApp.Comments.update_response(comm.id).response == 0 do %>
+            <td>coming.</td>
+          <% end %>
+          <%= if EventsApp.Comments.update_response(comm.id).response == 1 do %>
+            <td>not coming.</td>
+          <% end %>
+          <%= if EventsApp.Comments.update_response(comm.id).response == 2 do %>
+            <td>undecided.</td>
+          <% end %>
+          <%= if EventsApp.Comments.update_response(comm.id).response == 3 do %>
+            <td>This is an error.</td>
+          <% end %>
+        </p>
         <p class="card-text"><%= comm.body %></p>
       </div>
     </div>

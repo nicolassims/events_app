@@ -38,9 +38,35 @@ defmodule EventsApp.Comments do
 
   """
   def get_comment!(id) do
-    Repo.get!(Comment, id)
-    |> Repo.preload(:user)
-    |> Repo.preload(:event)
+    comment = update_response(id)
+  end
+
+  def update_response(id) do
+    comment = Repo.get!(Comment, id)
+    event = EventsApp.Events.get_event!(comment.event_id)
+    notlastcomm = Enum.reduce(event.comments, false, fn x, acc ->
+      cond do
+        x.user_id == comment.user_id && x.id > comment.id
+          -> acc || true
+        true
+          -> acc || false
+      end
+    end)
+
+    if notlastcomm do
+      lastresponse = Enum.reduce(event.comments, 0, fn x, acc ->
+        cond do
+          x.user_id == comment.user_id && x.id > comment.id
+            -> acc = x.response
+          true
+            -> acc
+        end
+      end)
+
+      %{ comment | response: lastresponse }
+    else
+      comment
+    end
   end
 
   @doc """
