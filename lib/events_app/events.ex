@@ -20,7 +20,6 @@ defmodule EventsApp.Events do
   def list_events do
     Repo.all(Event)
     |> Repo.preload(:user)
-    |> Repo.preload(:comment)
   end
 
   @doc """
@@ -40,7 +39,6 @@ defmodule EventsApp.Events do
   def get_event!(id) do
     Repo.get!(Event, id)
     |> Repo.preload(:user)
-    |> Repo.preload(:comment)
   end
 
   @doc """

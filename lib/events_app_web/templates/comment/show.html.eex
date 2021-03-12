@@ -21,8 +21,6 @@
   <% end %>
 </ul>
 
-<% IO.inspect(@comment.event) %>
-
 <%= if same_user(@conn, @comment.user_id) || same_user(@conn, @comment.event.user_id) do %>
   <span><%= link "Edit", to: Routes.comment_path(@conn, :edit, @comment) %></span>
 <% end %>
