@@ -34,8 +34,10 @@
   <h2>Comments</h2>
 
   <%= for comm <- @event.comments do %>
-    <div class="card">
+    <div class="card flex-row flex-wrap">
+      <img class="card-img" src="<%= Routes.user_path(@conn, :photo, comm.user) %>" alt="A profile picture." alt="">
       <div class="card-body">
+      <strong>
         <p>Posted by <%= comm.user.name %>, who is
          <%= if EventsApp.Comments.update_response(comm.id).response == 0 do %>
             <td>coming.</td>
@@ -50,7 +52,8 @@
             <td>This is an error.</td>
           <% end %>
         </p>
-        <p class="card-text"><%= comm.body %></p>
+      </strong>
+      <p class="card-text"><%= comm.body %></p>
       </div>
     </div>
   <% end %>
