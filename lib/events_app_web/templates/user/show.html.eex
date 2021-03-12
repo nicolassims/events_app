@@ -27,4 +27,4 @@
   <span><%= link "Edit", class: "btn btn-primary", to: Routes.user_path(@conn, :edit, @user) %></span>
 <% end %>
 
-<span><%= link "Back", class: "btn btn-primary", to: Routes.user_path(@conn, :index) %></span>
+<span><%= link "Back", class: "btn btn-primary", to: Routes.page_path(@conn, :index) %></span>

@@ -55,6 +55,12 @@
       </strong>
       <p class="card-text"><%= comm.body %></p>
       </div>
+      <%= if @current_user.id == comm.user_id || @current_user.id == EventsApp.Events.get_event!(comm.event_id).user_id do %>
+        <%= if @current_user.id == comm.user_id do %>
+          <p><%= link "Edit", class: "btn btn-primary", to: Routes.comment_path(@conn, :edit, comm) %></p>
+        <% end %>
+        <p><%= link "Delete", class: "btn btn-primary", to: Routes.comment_path(@conn, :delete, comm), method: :delete, data: [confirm: "Are you sure?"] %></p>
+      <% end %>
     </div>
   <% end %>
 </div>

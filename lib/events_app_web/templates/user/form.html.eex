@@ -30,7 +30,7 @@
   </div>
 
   <div>
-    <%= link "Back", class: "btn btn-primary", to: Routes.user_path(@conn, :index) %>
+    <%= link "Back", class: "btn btn-primary", to: Routes.page_path(@conn, :index) %>
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
