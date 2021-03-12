@@ -22,6 +22,6 @@
 </ul>
 
 <%= if same_user(@conn, @comment.user_id) || same_user(@conn, @comment.event.user_id) do %>
-  <span><%= link "Edit", to: Routes.comment_path(@conn, :edit, @comment) %></span>
+  <span><%= link "Edit", class: "btn btn-primary", to: Routes.comment_path(@conn, :edit, @comment) %></span>
 <% end %>
-<span><%= link "Back", to: Routes.comment_path(@conn, :index) %></span>
+<span><%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :show, @comment.event_id) %></span>
