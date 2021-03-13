@@ -34,10 +34,14 @@
       <%= textarea f, :guests, class: "form-control", placeholder: "Type email addresses here, separated by a comma."%>
       <%= error_tag f, :guests %>
     </div>
-
     <div>
       <%= link "Back", class: "btn btn-primary", to: Routes.event_path(@conn, :index) %>
-      <%= submit "Save", class: "btn btn-primary" %>
+
+      <%= if @conn.assigns[:event] do %>
+         <%= submit "Save", class: "btn btn-primary", data: [confirm: "Share this link with your pal!\nevents.freudiancreations.website/events/" <> to_string(@event.id)] %>
+      <% else %>
+         <%= submit "Save", class: "btn btn-primary", data: [confirm: "Share this link with your pal!\nevents.freudiancreations.website/events/" <> EventsApp.Events.get_maxid()] %>
+      <% end %>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>

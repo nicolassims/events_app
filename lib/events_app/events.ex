@@ -136,4 +136,17 @@ defmodule EventsApp.Events do
       "#{value} are"
     end
   end
+
+  def get_maxid do
+    value = Enum.reduce(Repo.all(Event), 0, fn x, acc ->
+      cond do
+        x.id > acc
+          -> acc = x.id
+        true
+          -> acc
+      end
+    end)
+
+    to_string(value + 1)
+  end
 end
