@@ -15,6 +15,13 @@
   </div>
 </div>
 
+<div>
+  Out of <%= EventsApp.Events.count_maxresponses(@event.guests) %> invited guests,
+  <%= EventsApp.Events.count_responses(@event.comments, 0) %> coming,
+  <%= EventsApp.Events.count_responses(@event.comments, 1) %> not coming, and
+  <%= EventsApp.Events.count_responses(@event.comments, 2) %> undecided.
+</div>
+
 <%= if @current_user do %>
   <%= if String.contains?(@event.guests, @current_user.email) || same_user(@conn, @event.user_id) do %>
     <div>

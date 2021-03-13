@@ -111,4 +111,29 @@ defmodule EventsApp.Events do
     Repo.preload(event, [comments: :user])
   end
 
+  def count_maxresponses(guests) do
+    emails = Regex.scan(~r/[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,}[,]/, guests <> ",")
+    length(emails)
+  end
+
+  def count_responses(comments, responsetype) do
+    lastresponsemap = Enum.reduce(comments, %{}, fn x, acc ->
+      Map.put(acc, x.user_id, x.response)
+    end)
+
+    value = Enum.reduce(lastresponsemap, 0, fn {k, v}, acc ->
+      cond do
+        v == responsetype
+          -> acc = acc + 1
+        true
+          -> acc
+      end
+    end)
+
+    if value == 1 do
+      "1 is"
+    else
+      "#{value} are"
+    end
+  end
 end
