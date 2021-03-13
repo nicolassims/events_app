@@ -15,19 +15,21 @@
   </div>
 </div>
 
-<%= if String.contains?(@event.guests, @current_user.email) || same_user(@conn, @event.user_id) do %>
-  <div>
-    <h2>Add Comment</h2>
+<%= if @current_user do %>
+  <%= if String.contains?(@event.guests, @current_user.email) || same_user(@conn, @event.user_id) do %>
+    <div>
+      <h2>Add Comment</h2>
 
-    <%= if any_user(@conn) do %>
-      <%= render(
-        EventsAppWeb.CommentView,
-        "form.html",
-        changeset: @new_comment,
-        action: Routes.comment_path(@conn, :create)
-      ) %>
-    <% end %>
-  </div>
+      <%= if any_user(@conn) do %>
+        <%= render(
+          EventsAppWeb.CommentView,
+          "form.html",
+          changeset: @new_comment,
+          action: Routes.comment_path(@conn, :create)
+        ) %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <div>
@@ -39,7 +41,7 @@
       <div class="card-body">
       <strong>
         <p>Posted by <%= comm.user.name %>, who is
-         <%= if EventsApp.Comments.update_response(comm.id).response == 0 do %>
+        <%= if EventsApp.Comments.update_response(comm.id).response == 0 do %>
             <td>coming.</td>
           <% end %>
           <%= if EventsApp.Comments.update_response(comm.id).response == 1 do %>
@@ -55,11 +57,13 @@
       </strong>
       <p class="card-text"><%= comm.body %></p>
       </div>
-      <%= if @current_user.id == comm.user_id || @current_user.id == EventsApp.Events.get_event!(comm.event_id).user_id do %>
-        <%= if @current_user.id == comm.user_id do %>
-          <p><%= link "Edit", class: "btn btn-primary", to: Routes.comment_path(@conn, :edit, comm) %></p>
+      <%= if @current_user do %>
+        <%= if @current_user.id == comm.user_id || @current_user.id == EventsApp.Events.get_event!(comm.event_id).user_id do %>
+          <%= if @current_user.id == comm.user_id do %>
+            <p><%= link "Edit", class: "btn btn-primary", to: Routes.comment_path(@conn, :edit, comm) %></p>
+          <% end %>
+          <p><%= link "Delete", class: "btn btn-primary", to: Routes.comment_path(@conn, :delete, comm), method: :delete, data: [confirm: "Are you sure?"] %></p>
         <% end %>
-        <p><%= link "Delete", class: "btn btn-primary", to: Routes.comment_path(@conn, :delete, comm), method: :delete, data: [confirm: "Are you sure?"] %></p>
       <% end %>
     </div>
   <% end %>

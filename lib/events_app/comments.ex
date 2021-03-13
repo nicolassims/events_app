@@ -39,6 +39,8 @@ defmodule EventsApp.Comments do
   """
   def get_comment!(id) do
     comment = update_response(id)
+    |> Repo.preload(:user)
+    |> Repo.preload(:event)
   end
 
   def update_response(id) do
